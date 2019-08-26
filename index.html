@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>3Dmal ArcGIS- Geodata</title>
+
+      <!-- Your custom styles (optional) -->
+      <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.12/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.12/"></script>
+
+</head>
+
+
+<body>
+    <div id="viewDiv">
+
+
+            <script>
+
+            require([
+                    "esri/Map",
+                    "esri/WebScene",
+                    "esri/views/SceneView",
+                    "esri/Basemap",
+                    "esri/layers/Layer",
+                    "esri/layers/SceneLayer",
+                    "esri/layers/FeatureLayer",
+                    "esri/layers/ElevationLayer",
+                    "esri/layers/GraphicsLayer",
+                    "esri/widgets/Sketch/SketchViewModel",
+                    "esri/symbols/WebStyleSymbol",
+                    "esri/views/layers/support/FeatureFilter",
+                    "esri/geometry/geometryEngine",
+                    "esri/Graphic",
+                    "esri/renderers/ClassBreaksRenderer",
+                    "esri/widgets/Slider",
+                    "esri/core/promiseUtils",
+                    "esri/widgets/LayerList",
+                    "esri/widgets/Expand",
+                ],
+                function(Map, WebScene, SceneView, Basemap, Layer, SceneLayer, FeatureLayer, ElevationLayer, GraphicsLayer, SketchViewModel, WebStyleSymbol, Graphic, geometryEngine, FeatureFilter, ClassBreaksRenderer, Slider, promiseUtils, LayerList, Expand) {
+                  
+
+
+                    const Bygninger_Norge = new SceneLayer({
+                        portalItem: {
+                            id: "d10b1ff653234cd08a3fc7da78820a14"
+                        },
+                        //title: "Bygninger",
+                        //listMode: "hide",
+                        //outFields: ["*"],
+                        //purgeOptions: {
+                        //    displayCount: 1000
+                        //},
+                        //renderer: ,
+                        //opacity: 0.3,
+
+                        //popupTemplate: template,
+                        refreshInterval: 0.01,
+                        elevationInfo: {
+                            // elevation mode that will place points on top of the buildings or other SceneLayer 3D objects
+                            mode: "absolute-height",
+                            //offset: 2.8
+                        },
+
+                    }
+
+                );
+                var basemap = new Basemap({
+                    portalItem: {
+                        id: "a1f189886ef54c5b8e03e37695e8925d" 
+                    }
+                });
+                var elevLyr = new ElevationLayer({
+                    portalItem: {
+                        id: "4526a4d94b844467a3ce130da8ca172d"
+                    }
+                });
+
+    
+    
+                    var map = new Map({
+                        basemap: basemap,
+                        //ground: "world-elevation",
+                        layers: [Bygninger_Norge],
+                        ground: {
+                            //surfaceColor: "#2A282B"
+                        }
+                    });
+    
+    
+                    map.ground.layers.add(elevLyr);
+
+
+    
+                    var view = new SceneView({
+                        container: "viewDiv",
+                        map: map,
+                        alphaCompositingEnabled: true,
+                        environment: {
+                            // background: {
+                            //     type: "color", // autocasts as new ColorBackground()
+                            //     color: "#2A282B"
+                            // },
+                            // disable stars
+                            starsEnabled: false,
+                            //disable atmosphere
+                            atmosphereEnabled: true
+                        },
+                        qualityProfile: "high",
+                        center: {
+                            
+                            x: 263164.68078,
+                            y: 6639010.9098,
+                            z: 10000,
+                            tilt: 65,
+                            spatialReference: 25833
+                        },
+                       
+                        qualityProfile: "high"
+    
+                    });
+                    });
+          </script>
+
+
+    </body>
+    </html>
